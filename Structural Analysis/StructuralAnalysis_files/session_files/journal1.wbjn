@@ -1,0 +1,97 @@
+# encoding: utf-8
+# Release 19.2
+SetScriptVersion(Version="19.2.120")
+template1 = GetTemplate(
+    TemplateName="Static Structural",
+    Solver="ANSYS")
+system1 = template1.CreateSystem()
+system1.DisplayText = "Revolute Joint"
+Save(Overwrite=True)
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.SetFile(FilePath=GetAbsoluteUserPathName("HIAST/5th year/5th Year Project/Compliant Mechanism/Revolute Joint Structural Analysis/AccuatedRevoluteJoint.STEP"))
+engineeringData1 = system1.GetContainer(ComponentName="Engineering Data")
+matl1 = engineeringData1.CreateMaterial(Name="PLA")
+matlProp1 = matl1.CreateProperty(
+    Name="Tensile Yield Strength",
+    Qualifiers={"Definition": "", "Behavior": ""})
+matlProp2 = matl1.CreateProperty(
+    Name="Elasticity",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "", "Behavior": "Isotropic"})
+matl1.Delete()
+matl2 = engineeringData1.CreateMaterial(Name="PLA")
+matlProp3 = matl2.CreateProperty(
+    Name="Elasticity",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "", "Behavior": "Isotropic"})
+matlProp3.SetVariableProperty(
+    VariableName="Young's Modulus",
+    Property="Unit",
+    Value="MPa")
+matlProp3.SetData(
+    Index=-1,
+    Variables=["Young's Modulus"],
+    Values=[["2410 [MPa]"]])
+matlProp4 = matl2.CreateProperty(
+    Name="Tensile Yield Strength",
+    Qualifiers={"Definition": "", "Behavior": ""})
+matlProp4.SetVariableProperty(
+    VariableName="Tensile Yield Strength",
+    Property="Unit",
+    Value="MPa")
+matlProp4.SetData(
+    Index=-1,
+    Variables=["Tensile Yield Strength"],
+    Values=[["72.3 [MPa]"]])
+Save(Overwrite=True)
+matlProp3.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["1"]])
+matlProp3.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["7.88860905221012E-31"]])
+Save(Overwrite=True)
+matlProp3.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["1"]])
+matlProp3.SetData(
+    SheetName="Elasticity",
+    SheetQualifiers={"Definition": "", "Behavior": "Isotropic", "Derive from": "Young's Modulus and Poisson's Ratio"},
+    Variables=["Temperature"],
+    Values=[["25 [C]"]])
+Save(Overwrite=True)
+matlProp3.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["0.7"]])
+matlProp3.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["1"]])
+Save(Overwrite=True)
+matlProp3.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["2"]])
+matlProp3.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["1"]])
+engineeringDataComponent1 = system1.GetComponent(Name="Engineering Data")
+engineeringDataComponent1.Update(AllDependencies=True)
+engineeringDataComponent1.Update(AllDependencies=True)
+matlProp3.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["0.3"]])
+Save(Overwrite=True)
+modelComponent1 = system1.GetComponent(Name="Model")
+modelComponent1.Refresh()
+model1 = system1.GetContainer(ComponentName="Model")
+model1.Edit()
+model1.Exit()
+matlProp3.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["0.5"]])
+matlProp3.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["0.49"]])
+modelComponent1.Refresh()
+model1.Edit()
+Save(Overwrite=True)
+model1.Exit()

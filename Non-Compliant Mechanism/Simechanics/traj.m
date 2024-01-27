@@ -1,0 +1,55 @@
+function [desired] = traj(t)
+distance = 0.112;
+xlength = 0.01;
+ylength = 0.01;
+sec = 1;
+x0 = 0;
+y0 = 0;
+xd = 0;
+yd = 0;
+if t<=1*sec
+    x0 = 0;
+    y0 = 0;
+    xd = -xlength/2;
+    yd = -ylength/2;
+elseif t<=2*sec
+    t = t-1*sec;
+    x0 = -xlength/2;
+    y0 = -ylength/2;
+    xd = -xlength/2;
+    yd = -ylength/2;
+elseif t<=3*sec
+    t = t-2*sec;
+    x0 = -xlength/2;
+    y0 = -ylength/2;
+    xd = +xlength/2;
+    yd = -ylength/2;
+elseif t<=4*sec
+    t = t-3*sec;
+    x0 = +xlength/2;
+    y0 = -ylength/2;
+    xd = +xlength/2;
+    yd = +ylength/2;
+elseif t<=5*sec
+    t = t-4*sec;
+    x0 = +xlength/2;
+    y0 = +ylength/2;
+    xd = -xlength/2;
+    yd = +ylength/2;
+elseif t<=6*sec
+    t = t-5*sec;
+    x0 = -xlength/2;
+    y0 = +ylength/2;
+    xd = -xlength/2;
+    yd = -ylength/2;
+end
+% y0=0;yd=0;
+vx = (xd-x0)/sec;
+vy = (yd-y0)/sec;
+x = x0 + vx*t;
+y = y0 + vy*t;
+alpha = atan2(x,distance);
+gamma = atan2(y,distance);
+desired = [alpha gamma];
+end
+
